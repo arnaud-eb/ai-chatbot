@@ -1,16 +1,18 @@
-import "dotenv/config";
+import { openai } from "./openai.js";
 
-import OpenAI from "openai";
-
-const openai = new OpenAI();
-
-openai.chat.completions.create({
+const results = await openai.chat.completions.create({
   messages: [
     {
       role: "system",
       content:
         "You are an AI assistant, answer any questions to the best of your ability.",
     },
+    {
+      role: "user",
+      content: "Hi! how is the weather in summer?",
+    },
   ],
   model: "gpt-4o",
 });
+
+console.log(results.choices);
